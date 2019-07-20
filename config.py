@@ -1,7 +1,7 @@
 """
 Contains global configs for score.py
 """
-width = 1024
-height = 1024
+width = 4096
+height = 4096
 input_file = 'input.csv'
 output_file = 'output.csv'
