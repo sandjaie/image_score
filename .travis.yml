@@ -15,3 +15,6 @@ before_cache:
 cache:
   directories:
     - $HOME/.cache/pip
+
+after_success:
+  - docker build -t sandjaie/imagescore -f ./Dockerfile
