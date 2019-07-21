@@ -12,7 +12,6 @@ def helper():
         width [int]     -- [Optional: width to be resized, default = 4096]
     """)
 
-
 @click.command()
 @click.option('--infile', '-i', help="Enter the input file path")
 @click.option('--outfile', '-o', help="Enter the output file path")
@@ -32,4 +31,3 @@ def main(infile, outfile, height, width):
 
 if __name__ == '__main__':
     main()
-
