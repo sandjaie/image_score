@@ -1,8 +1,5 @@
 from setuptools import setup, find_packages
 
-# with open('requirements.txt', 'rt') as rf:
-#     requirements = rf.readlines()
-
 requirements = [
     "opencv-python",
     "scikit-image"
