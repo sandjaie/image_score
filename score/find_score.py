@@ -11,10 +11,10 @@ import csv
 import cv2
 from skimage.measure import compare_ssim
 from PIL import Image
-import score.config as cfg
+from configs import config as cfg
 
 
-def find_score(img_a, img_b):
+def find_image_score(img_a, img_b):
     """
     Calculates the image similarity score and execution time
 
@@ -28,7 +28,7 @@ def find_score(img_a, img_b):
     """
     try:
         start = timeit.default_timer()
-        std_dimensions = (cfg.width, cfg.height)
+        std_dimensions = (cfg.WIDTH, cfg.HEIGHT)
         img_a_resized = cv2.resize(cv2.imread(img_a), std_dimensions)
         img_b_resized = cv2.resize(cv2.imread(img_b), std_dimensions)
 
@@ -45,14 +45,14 @@ def find_score(img_a, img_b):
 def write_output():
     """Writes the output file 'output.csv'
     """
-    with open(cfg.output_file, 'w') as outfile:
-        with open(cfg.input_file, 'r') as infile:
+    with open(cfg.OUTFILE, 'w') as outfile:
+        with open(cfg.INFILE, 'r') as infile:
             csv_reader = csv.reader(infile, delimiter=',')
             next(csv_reader)
             outfile_headers = "image1,image2,similar,elapsed"
             outfile.write(outfile_headers + '\n')
             for row in csv_reader:
-                image_score = find_score(row[0], row[1])
+                image_score = find_image_score(row[0], row[1])
                 outfile.write(",".join(map(str, row)))
                 outfile.write(',' + ','.join(map(str, image_score)) + '\n')
                 print(f"Comparison of {row[0]} and {row[1]} is completed\n")
@@ -67,7 +67,7 @@ def check_image():
     Returns:
         None -- [returns None if the checks succeeds else returns the error]
     """
-    with open(cfg.input_file, 'r') as infile:
+    with open(cfg.INFILE, 'r') as infile:
         reader = csv.reader(infile, delimiter=',')
         next(reader)
         for row in reader:
@@ -85,11 +85,11 @@ def main():
     checks if the input file exists and if
     check_image is successful, calls the write_output
     """
-    if os.path.exists(cfg.input_file):
+    if os.path.exists(cfg.INFILE):
         if check_image() is None:
             write_output()
     else:
-        print(f"{cfg.input_file} file missing")
+        print(f"Input file: {cfg.INFILE} is missing")
 
 if __name__ == "__main__":
     main()
