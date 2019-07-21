@@ -11,8 +11,6 @@ import csv
 from skimage.measure import compare_ssim
 from PIL import Image
 import cv2
-from score.configs import config as cfg
-
 
 def find_image_score(img_a, img_b, height, width):
     """
@@ -28,9 +26,8 @@ def find_image_score(img_a, img_b, height, width):
     """
     try:
         start = timeit.default_timer()
-        std_dimensions = (cfg.WIDTH, cfg.HEIGHT)
         print(f"heigth: {height} Width: {width}")
-        #std_dimensions=(height, width)
+        std_dimensions=(height, width)
         img_a_resized = cv2.resize(cv2.imread(img_a), std_dimensions)
         img_b_resized = cv2.resize(cv2.imread(img_b), std_dimensions)
 
@@ -60,6 +57,14 @@ def write_output(infile, outfile, height, width):
                 out_file.write(',' + ','.join(map(str, image_score)) + '\n')
                 print(f"Comparison of {row[0]} and {row[1]} is completed\n")
 
+def check_file(infile):
+    """Checks if the file is empty
+    """
+    with open(infile, 'r') as input_file:
+        if input_file.readline() == '':
+            return print(f"{infile} is empty")
+    return "OK"
+
 def check_image(infile):
     """
     Checks the input file
@@ -79,7 +84,7 @@ def check_image(infile):
                 Image.open(row[1])
             except Exception as err:
                 return print("check_image:", err)
-    return None
+        return "OK"
 
 def main(infile, outfile, height, width):
     """
@@ -89,10 +94,8 @@ def main(infile, outfile, height, width):
     check_image is successful, calls the write_output
     """
     if os.path.exists(infile):
-        if check_image(infile) is None:
-            write_output(infile, outfile, height=cfg.HEIGHT, width=cfg.WIDTH)
-            height=None
-            width=None
+        if check_file(infile) == "OK" and check_image(infile) == "OK":
+            write_output(infile, outfile, height, width)
     else:
         print(f"Input file: {infile} is missing")
 

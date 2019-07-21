@@ -1,5 +1,5 @@
 """
 Contains global configs for find_score.py
 """
-WIDTH = 512
-HEIGHT = 512
+WIDTH = 4096
+HEIGHT = 4096
