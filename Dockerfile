@@ -6,3 +6,4 @@ WORKDIR /app
 COPY . .
 
 RUN python setup.py install
+ENTRYPOINT ["imagescore"]
