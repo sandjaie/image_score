@@ -20,9 +20,7 @@ def test_find_score_2():
     score = cal_score(img_a, img_b)
     assert score == 0.66
 
-def check_image():
+def test_check_image():
     img = Image.open('tests/images/ac.png')
     if img:
         assert img
-
-check_image()

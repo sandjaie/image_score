@@ -2,4 +2,4 @@ opencv-python
 scikit-image
 pylint
 pytest
-tox
+pytest-cov

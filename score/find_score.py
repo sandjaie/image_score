@@ -8,9 +8,9 @@ Returns:
 import os
 import timeit
 import csv
-import cv2
 from skimage.measure import compare_ssim
 from PIL import Image
+import cv2
 from configs import config as cfg
 
 

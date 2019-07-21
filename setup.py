@@ -1,7 +1,12 @@
 from setuptools import setup
 
-with open('requirements.txt', 'rt') as rf:
-    requirements = rf.readlines()
+# with open('requirements.txt', 'rt') as rf:
+#     requirements = rf.readlines()
+
+requirements = [
+    "opencv-python",
+    "scikit-image"
+]
 
 setup(
     name='imagescore',
