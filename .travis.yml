@@ -6,6 +6,8 @@ install:
   - pip install -r requirements-dev.txt
   - "TOX_ENV=${TRAVIS_PYTHON_VERSION/[0-9].[0-9]/py${TRAVIS_PYTHON_VERSION/.}}"
 script:
+  - pylint score
+  - pylint tests
   - coverage run --source=tests -m pytest
   - coverage report
   - coverage run --source=score -m pytest
