@@ -1,6 +1,4 @@
-opencv-python
-scikit-image
-pylint
+pylint==2.0.1
 pytest
 pytest-cov
 tox

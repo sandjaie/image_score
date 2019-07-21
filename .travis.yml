@@ -4,8 +4,13 @@ python:
 
 install:
   - pip install -r requirements-dev.txt
+  - pip install -r requirements.txt
   - "TOX_ENV=${TRAVIS_PYTHON_VERSION/[0-9].[0-9]/py${TRAVIS_PYTHON_VERSION/.}}"
+
 script:
+  - echo $TOX_ENV
+  - coverage run --source=tests -m pytest
+  - coverage report
   - coverage run --source=score -m pytest
   - coverage report
   - tox -e $TOX_ENV

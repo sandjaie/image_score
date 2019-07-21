@@ -2,7 +2,8 @@ from setuptools import setup, find_packages
 
 requirements = [
     "opencv-python",
-    "scikit-image"
+    "scikit-image",
+    "click"
 ]
 
 setup(
@@ -21,7 +22,7 @@ setup(
     install_requires=requirements,
     entry_points={
         'console_scripts': [
-            'imagescore=score.find_score:main'
+            'imagescore=score.cli:main'
         ]
     }
 )

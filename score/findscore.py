@@ -11,10 +11,8 @@ import csv
 from skimage.measure import compare_ssim
 from PIL import Image
 import cv2
-from score.configs import config as cfg
 
-
-def find_image_score(img_a, img_b):
+def find_image_score(img_a, img_b, height, width):
     """
     Calculates the image similarity score and execution time
 
@@ -28,7 +26,8 @@ def find_image_score(img_a, img_b):
     """
     try:
         start = timeit.default_timer()
-        std_dimensions = (cfg.WIDTH, cfg.HEIGHT)
+        print(f"heigth: {height} Width: {width}")
+        std_dimensions = (height, width)
         img_a_resized = cv2.resize(cv2.imread(img_a), std_dimensions)
         img_b_resized = cv2.resize(cv2.imread(img_b), std_dimensions)
 
@@ -38,26 +37,39 @@ def find_image_score(img_a, img_b):
         stop = timeit.default_timer()
         execution_time = round(stop - start, 2)
         return [score, execution_time]
+
     except Exception as err:
-        return print(err)
+        return print("find_image_score:", err)
 
 
-def write_output():
+def write_output(infile, outfile, height, width):
     """Writes the output file 'output.csv'
     """
-    with open(cfg.OUTFILE, 'w') as outfile:
-        with open(cfg.INFILE, 'r') as infile:
-            csv_reader = csv.reader(infile, delimiter=',')
+    with open(outfile, 'w') as out_file:
+        with open(infile, 'r') as in_file:
+            csv_reader = csv.reader(in_file, delimiter=',')
             next(csv_reader)
-            outfile_headers = "image1,image2,similar,elapsed"
-            outfile.write(outfile_headers + '\n')
-            for row in csv_reader:
-                image_score = find_image_score(row[0], row[1])
-                outfile.write(",".join(map(str, row)))
-                outfile.write(',' + ','.join(map(str, image_score)) + '\n')
-                print(f"Comparison of {row[0]} and {row[1]} is completed\n")
+            out_file_headers = "image1,image2,similar,elapsed"
+            out_file.write(out_file_headers + '\n')
 
-def check_image():
+            for row in csv_reader:
+                image_score = find_image_score(row[0], row[1], height, width)
+                print("Score: ", image_score)
+                out_file.write(",".join(map(str, row)))
+                out_file.write(',' + ','.join(map(str, image_score)) + '\n')
+                print(f"Comparison of {row[0]} and {row[1]} is completed\n")
+    if os.path.exists(outfile):
+        return "OK"
+
+def check_file(infile):
+    """Checks if the file is empty
+    """
+    with open(infile, 'r') as input_file:
+        if input_file.readline() == '':
+            return print(f"{infile} is empty")
+    return "OK"
+
+def check_images_in_file(infile):
     """
     Checks the input file
 
@@ -67,29 +79,27 @@ def check_image():
     Returns:
         None -- [returns None if the checks succeeds else returns the error]
     """
-    with open(cfg.INFILE, 'r') as infile:
-        reader = csv.reader(infile, delimiter=',')
+    with open(infile, 'r') as input_file:
+        reader = csv.reader(input_file, delimiter=',')
         next(reader)
         for row in reader:
             try:
                 Image.open(row[0])
                 Image.open(row[1])
             except Exception as err:
-                return print(err)
-    return None
+                return print("check_image:", err)
+        return "OK"
 
-def main():
+def main(infile, outfile, height, width):
     """
     Main function
 
     checks if the input file exists and if
     check_image is successful, calls the write_output
     """
-    if os.path.exists(cfg.INFILE):
-        if check_image() is None:
-            write_output()
+    if os.path.exists(infile):
+        if check_file(infile) == "OK" and check_images_in_file(infile) == "OK":
+            write_output(infile, outfile, height, width)
     else:
-        print(f"Input file: {cfg.INFILE} is missing")
-
-if __name__ == "__main__":
-    main()
+        print(f"Input file: {infile} is missing")
+    return "OK"
