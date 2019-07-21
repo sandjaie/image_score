@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # with open('requirements.txt', 'rt') as rf:
 #     requirements = rf.readlines()
@@ -20,7 +20,7 @@ setup(
     author='sandjaie',
     url='https://github.com/sandjaie/image_score',
     version='1.0.0',
-    packages=["score"],
+    packages=find_packages(),
     install_requires=requirements,
     entry_points={
         'console_scripts': [

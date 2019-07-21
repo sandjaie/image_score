@@ -130,3 +130,7 @@ input.csv
 output.csv
 images/
 Dockerfile
+tests/
+tox.ini
+pytest.ini
+requirements-dev.txt

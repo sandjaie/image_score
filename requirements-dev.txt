@@ -3,3 +3,4 @@ scikit-image
 pylint
 pytest
 pytest-cov
+tox
