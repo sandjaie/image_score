@@ -9,7 +9,6 @@ install:
 
 script:
   - pylint score
-  - pylint tests
   - coverage run --source=tests -m pytest
   - coverage report
   - coverage run --source=score -m pytest
