@@ -11,7 +11,7 @@ import csv
 from skimage.measure import compare_ssim
 from PIL import Image
 import cv2
-from configs import config as cfg
+from score.configs import config as cfg
 
 
 def find_image_score(img_a, img_b):
