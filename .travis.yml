@@ -17,4 +17,7 @@ cache:
     - $HOME/.cache/pip
 
 after_success:
-  - docker build -t sandjaie/imagescore -f ./Dockerfile
+  - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t sandjaie/imagescore -f ./Dockerfile .
+  - docker tag sandjaie/imagescore sandjaie/imagescore:$TRAVIS_BUILD_NUMBER
+  - docker push sandjaie/imagescore
