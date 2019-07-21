@@ -27,7 +27,7 @@ def find_image_score(img_a, img_b, height, width):
     try:
         start = timeit.default_timer()
         print(f"heigth: {height} Width: {width}")
-        std_dimensions=(height, width)
+        std_dimensions = (height, width)
         img_a_resized = cv2.resize(cv2.imread(img_a), std_dimensions)
         img_b_resized = cv2.resize(cv2.imread(img_b), std_dimensions)
 
@@ -37,6 +37,7 @@ def find_image_score(img_a, img_b, height, width):
         stop = timeit.default_timer()
         execution_time = round(stop - start, 2)
         return [score, execution_time]
+
     except Exception as err:
         return print("find_image_score:", err)
 
@@ -50,12 +51,15 @@ def write_output(infile, outfile, height, width):
             next(csv_reader)
             out_file_headers = "image1,image2,similar,elapsed"
             out_file.write(out_file_headers + '\n')
+
             for row in csv_reader:
                 image_score = find_image_score(row[0], row[1], height, width)
                 print("Score: ", image_score)
                 out_file.write(",".join(map(str, row)))
                 out_file.write(',' + ','.join(map(str, image_score)) + '\n')
                 print(f"Comparison of {row[0]} and {row[1]} is completed\n")
+    if os.path.exists(outfile):
+        return "OK"
 
 def check_file(infile):
     """Checks if the file is empty
@@ -65,7 +69,7 @@ def check_file(infile):
             return print(f"{infile} is empty")
     return "OK"
 
-def check_image(infile):
+def check_images_in_file(infile):
     """
     Checks the input file
 
@@ -94,10 +98,8 @@ def main(infile, outfile, height, width):
     check_image is successful, calls the write_output
     """
     if os.path.exists(infile):
-        if check_file(infile) == "OK" and check_image(infile) == "OK":
+        if check_file(infile) == "OK" and check_images_in_file(infile) == "OK":
             write_output(infile, outfile, height, width)
     else:
         print(f"Input file: {infile} is missing")
-
-if __name__ == "__main__":
-    main()
+    return "OK"

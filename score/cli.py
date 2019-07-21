@@ -1,8 +1,13 @@
+"""
+    Cli wrapper for findscore
+"""
 import click
 from score.findscore import main as score
 from score.configs import config as cfg
 
 def helper():
+    """Prints help message
+    """
     print("""
         e.g imagescore --infile 'input.csv' --outfile '/tmp/output.csv'\n
         The options are:
@@ -15,8 +20,8 @@ def helper():
 @click.command()
 @click.option('--infile', '-i', help="Enter the input file path")
 @click.option('--outfile', '-o', help="Enter the output file path")
-@click.option('--height', '-h', type=int, help="Heigth to resize the image")
-@click.option('--width', '-w', type=int, help="Width to resize the image")
+@click.option('--height', '-h', type=int, help="[optional] Heigth to resize the image")
+@click.option('--width', '-w', type=int, help="[optional] Width to resize the image")
 def main(infile, outfile, height, width):
     """cli function for findscore
     """
@@ -25,9 +30,6 @@ def main(infile, outfile, height, width):
             score(infile, outfile, height=cfg.HEIGHT, width=cfg.WIDTH)
         else:
             score(infile, outfile, height, width)
-    except Exception as err:
+    except Exception:
         helper()
-        print('Error:' , err)
-
-if __name__ == '__main__':
-    main()
+        print("Error: Missing options")
