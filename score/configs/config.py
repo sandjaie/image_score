@@ -1,7 +1,7 @@
 """
 Contains global configs for find_score.py
 """
-width = 512
-height = 512
-input_file = '../score/input.csv'
-output_file = '../score/output.csv'
+WIDTH = 4096
+HEIGHT = 4096
+INFILE = '/tmp/input.csv'
+OUTFILE = '/tmp/output.csv'
