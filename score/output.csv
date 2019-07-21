@@ -1,0 +1,3 @@
+image1,image2,similar,elapsed
+images/aa.jpg,images/ab.jpg,0.18,14.64
+images/ab.jpg,images/bb.jpg,0.21,13.04
