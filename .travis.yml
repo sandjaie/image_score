@@ -14,7 +14,6 @@ script:
   - coverage run --source=score -m pytest
   - coverage report
   - tox -e $TOX_ENV
-  - pylint score
 
 before_cache:
   - rm -rf $HOME/.cache/pip/log
