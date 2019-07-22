@@ -13,17 +13,20 @@ def helper():
         The options are:
         --infile | -i [str]    -- [Input file path]
         --outfile | -o [str]   -- [Output file path]
-        --height | -h [int]    -- [Optional: height to be resized, default = 4096]
+        --heigth | -h [int]    -- [Optional: Heigth to be resized, default = 4096]
         --width | -w [int]     -- [Optional: width to be resized, default = 4096]
     """)
 
 @click.command()
 @click.option('--infile', '-i', help="Enter the input file path")
 @click.option('--outfile', '-o', help="Enter the output file path")
-@click.option('--height', '-h', type=int, help="[optional] Heigth to resize the image")
-@click.option('--width', '-w', type=int, help="[optional] Width to resize the image")
+@click.option('--heigth', '-h', type=int, help="[optional] Heigth of the image to be resized, default = 4096")
+@click.option('--width', '-w', type=int, help="[optional] Width of the image to be resized, default = 4096")
 def main(infile, outfile, height, width):
-    """cli function for findscore
+    """
+    This tool compares a set of images and returns the similarity score\n
+    e.g imagescore --infile 'input.csv' --outfile 'output.csv'\n
+    e.g imagescore -i 'input.csv' -o 'output.csv -h 1024 -w 1024'
     """
     try:
         if height is None and width is None:
