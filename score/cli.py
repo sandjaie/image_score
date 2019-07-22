@@ -9,12 +9,12 @@ def helper():
     """Prints help message
     """
     print("""
-        e.g imagescore --infile 'input.csv' --outfile '/tmp/output.csv'\n
+        e.g imagescore --infile 'input.csv' --outfile 'output.csv'\n
         The options are:
-        infile [str]    -- [Input file path]
-        outfile [str]   -- [Output file path]
-        height [int]    -- [Optional: height to be resized, default = 4096]
-        width [int]     -- [Optional: width to be resized, default = 4096]
+        --infile | -i [str]    -- [Input file path]
+        --outfile | -o [str]   -- [Output file path]
+        --height | -h [int]    -- [Optional: height to be resized, default = 4096]
+        --width | -w [int]     -- [Optional: width to be resized, default = 4096]
     """)
 
 @click.command()
