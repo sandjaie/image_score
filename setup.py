@@ -5,18 +5,16 @@ requirements = [
     "scikit-image",
     "click"
 ]
-version = '1.0.0'
+version = '1.0.2'
+download_url = f'https://github.com/sandjaie/image_score/archive/{version}.tar.gz'
 
 with open('README.md', 'r', errors='ignore') as fd:
     long_desc = fd.read()
 
-with open('LICENSE.txt', errors='ignore') as f:
-    lic = f.read()
-
 setup(
     name='imagescore',
     description='Calculates the similarity score between images',
-    #long_description=long_desc,
+    long_description=long_desc,
     long_description_content_type='text/markdown',
     url='https://github.com/sandjaie/image_score',
     author='sandjaie',
@@ -24,8 +22,8 @@ setup(
     version=version,
     packages=find_packages(),
     install_requires=requirements,
-    download_url= f'https://github.com/sandjaie/image_score/archive/{version}.tar.gz',
-    license=lic,
+    download_url=download_url,
+    license='MIT',
     classifiers = [
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',

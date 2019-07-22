@@ -12,15 +12,10 @@ script:
 - coverage run --source=score -m pytest
 - coverage report
 - twine check dist/*
-# after_success:
-# - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_ID" --password-stdin
-# - docker build -t sandjaie/imagescore -f ./Dockerfile .
-# - docker tag sandjaie/imagescore sandjaie/imagescore:$TRAVIS_BUILD_NUMBER
-# - docker push sandjaie/imagescore
 deploy:
   provider: pypi
   user: sandjaie
   password:
-    secure: GIt2aRW5pNXHQ3fWj5SGGjXphhZwlbDosDajE/5k73shyAlIzAZo+2rprvCKP85Ywc4WnBOts4Zm9jB1hwn8M/fpIyCn0ejUTH4CPlSdQwXiWlQ7wVUJbg9tzoDfOb6kG3iIfT1FmYIO2xS0e1laZI716LejdWZMAQejwYVKt0Xcbr2p19ZXNjyCl1y/Dco85LAN65TYVAFQXGUrzT6YqE30nkpoVHPMmXMVbiMnUa2bsDFyFmj+KHvALZyEmhFRmEo3L9owhbTj4FRvZE84LrPMGXhk894mHzQQVrOd30dZE0YIGatHGPFZk0M2IayYlJ82kYYuhp8qS9A78fmGeZA3pdX9wJqIBjFVqJlfIUO7VJ42APNFWKyg9Ni4Kv204OPBnDL7PCvgX6H5gXGpgaUcKRHZ2um1BEEZ4ckLcEZbDv9trFtxXMuWNltveDlYhwL2lmg0Jatm4o4E4Q3ToxD4LuDKvWe5uukPvghoqlHY0bZj5mv0zL+d+FLzOAstqMvAFPKE0siTHg5rm04INlcW2/uh8QduKZDpC4m2xGQ4l+htveckU9TDSlAHtYYK8gpvnEuTclIAyv8TBlvRA6n1O8q0mEzoguRL8MS6XoXTHUCKzSlxhX8C8OPnIC0bkMDMaqMovvLMXRd+oBuxozDgU6zfakJL0ScUA4QYEV4=
+    secure: caj3u8vG9nSmhP30DE8hrglR01eoYzk7SSc0EbABQVNY+i8r9QQvpAoWBmb5jy6K8BjkSWoNXiFYKt1cxct881pfSFHI+to8x7Tkacce7PD63Gh708HLmTXCXLqyx3y5gLF4NfRTBlcDpoM3LAv3t2PGWerYHSjq4ebJPQgkSvPVVtLHamnjvDa7MsW6q+LZup+V0RvMWzYTFRmhjZS/VaGGZ9vsI0HlQ3MDnBJVhAm0j7pis1beWZrmKD905/tE3Hu/CAu5TxsVthfGghePohjA12LBANg2Ljd6dytmZfM5kvTIMgm05Z/KS1lEIsTPKnF7QN3STE4oZMv6S1dIxQzHC7EoKN9tE8fG0MRSojquFwjlD+pSk45+xT0k1V2dq1LdPXEusNaI2QG13nLduR4CbpBzee5LEEWUf0nBjyRYMErhv8S25W9zKMfYIX+ge+sXkEcRqof2gAL8oRUzJLfb6Q6/abPcTj7puqkz6K8dlD1VAyV9tgzIrosTjLMB26LVb21+tlzoEXH2dOJuY2r5I4AT1RU+SzpAfbemKm+ZVoeppKLoE6ugIsWnts7uDICh18mV6Oz5zFlYoafyLF61hI7NLBzb3TMNxfyhzA6tcUnQEArmanxdGaAum7T0xXIEEtu/PE51t8ztDvVzxcFXQCJEFJaURgrRBqiXNGU=
   on:
-    branch: master
+    tags: true
