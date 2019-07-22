@@ -5,12 +5,24 @@
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/imagescore.svg)
 
-
 ### Calculate image similarity score
-Expected Input: csv file with images and its absolute path <br>
-Expected Output: csv file with images and its absolute path, image score and elapsed time in secs. <br>
 
-#### Install:<br>
+#### Tools used:
+```
+Language: Python
+Dev Modules Used: 
+- opencv-python
+- scikit-image
+- click
+Test Modules Used:
+- tox
+- pytest
+- pylint
+- pytest-cov
+Build and Deployment: Travis-ci
+App Repository: PyPi 
+```
+#### Installation:<br>
 `pip3 install imagescore`
 
 #### How to run:<br>
@@ -22,6 +34,10 @@ Expected Output: csv file with images and its absolute path, image score and ela
         --outfile | -o [str]    -- [Output file path]
         --height  | -h [int]    -- [Optional: height to be resized, default = 4096]
         --width   | -w [int]    -- [Optional: width to be resized, default = 4096]
+
+Expected Input: csv file with images and its absolute path <br>
+Expected Output: csv file with images and its absolute path, image score and elapsed time in secs. <br>
+
 
 #### Developer mode: <br>
 The application is written in python3. Hence create a virtualenv with python3 and install the dependencies from `requirements.txt`. 
