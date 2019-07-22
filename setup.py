@@ -11,12 +11,12 @@ with open('README.md', 'r', errors='ignore') as fd:
     long_desc = fd.read()
 
 with open('LICENSE.txt', errors='ignore') as f:
-    license = f.read()
+    lic = f.read()
 
 setup(
     name='imagescore',
     description='Calculates the similarity score between images',
-    long_description=long_desc,
+    #long_description=long_desc,
     long_description_content_type='text/markdown',
     url='https://github.com/sandjaie/image_score',
     author='sandjaie',
@@ -25,7 +25,7 @@ setup(
     packages=find_packages(),
     install_requires=requirements,
     download_url= f'https://github.com/sandjaie/image_score/archive/{version}.tar.gz',
-    license=license,
+    license=lic,
     classifiers = [
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
