@@ -6,7 +6,7 @@ install:
 - pip install -r requirements-dev.txt
 - pip install -r requirements.txt
 - pip install -U twine
-#- TOX_ENV=${TRAVIS_PYTHON_VERSION/[0-9].[0-9]/py${TRAVIS_PYTHON_VERSION/.}}
+- python3 setup.py sdist bdist_wheel
 
 script:
 - echo $TOX_ENV
@@ -14,16 +14,9 @@ script:
 - coverage report
 - coverage run --source=score -m pytest
 - coverage report
-#- tox -e $TOX_ENV
-
-before_cache:
-- rm -rf $HOME/.cache/pip/log
-cache:
-  directories:
-  - "$HOME/.cache/pip"
+- twine check dist/*
 
 after_success:
-- python3 setup.py sdist bdist_wheel
 - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_ID" --password-stdin
 - docker build -t sandjaie/imagescore -f ./Dockerfile .
 - docker tag sandjaie/imagescore sandjaie/imagescore:$TRAVIS_BUILD_NUMBER
@@ -31,6 +24,7 @@ after_success:
 
 deploy:
   provider: pypi
+  user: sandjaie
   password:
     secure: G0ReTQYvCNgd6wEi434NkB96FSAy+XOdpjUhywTyLTcEw5k1NqsYEG1hzi6QHSfDdlLz61GolKYdZWummqWPp19Nhu3DnXozuPMpr9BA448DYruohnwD8SllHSB0HjxeImG3ioZ2NiSzIjGjKtIksC6A+vn9JWMGeEVMyn61mhBnB5YC+/rUW1ogHGCqA8Cd+l4ASFKC1Y8bL1PZhM13YM4XXoaMWcEDqAyVzb6vje/M51Frp/duSDAnWvc/3zkwSc7+U+NruoUtASvxyb/LBhDo+M4bjsOCzBanxEqGojQYhy7TT2L24boRf8chWpeK2GHld3QrJoB8cgjxsrvX/x7cq2MQIApSheyTSmfcwrJelSV3lvqDSWXcokSAoJX3Z0QHbwEVXwQo6oSnAwEP7LNfSd2BA0XEnC//K5wrIhq5sHu+kHEn7k/XKriQ63JC8r4DvsUNzEaZCx4LxOK4QlAUZF9SW8dUkuNCclC2Xcc+aBF0xL1+lozieuQwJ3aR5zWz1BIGU0fiINai8r/gtCWDu25qclLDJa28tnLMkMuuCtHFCmIDFXk+KTfBfzuLm1+klu9XuGLIfQ9p2k8M1b6w90/RRKkphsmWiRo3tE4S5AaZs2EqapE5aZQyO5s+VSOQ8laT4mvmlXoQtdtbbWwLN/24uBSSEygG4NIhmCI=
   on:
