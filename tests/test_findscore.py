@@ -4,14 +4,6 @@ import cv2
 from score.findscore import find_image_score, check_file, check_images_in_file, main, write_output
 from tests.test_config import *
 
-# image1 = 'tests/images/ac.png'
-# image2 = 'tests/images/bc.png'
-# image3 = 'tests/images/bb.jpg'
-# height = 512
-# width = 512
-# infile = 'tests/test_input.csv'
-# outfile = 'tests/test_output.csv'
-
 
 def cal_score(img_a, img_b):
     ssim, _ = compare_ssim(img_a, img_b, full=True, multichannel=True)
