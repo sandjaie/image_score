@@ -5,6 +5,7 @@
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/imagescore.svg)
 
+
 ### Calculate image similarity score
 Expected Input: csv file with images and its absolute path <br>
 Expected Output: csv file with images and its absolute path, image score and elapsed time in secs. <br>
