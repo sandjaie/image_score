@@ -11,7 +11,7 @@ script:
 - coverage report
 - coverage run --source=score -m pytest
 - coverage report
-- twine check dist/*
+
 deploy:
   provider: pypi
   user: sandjaie
