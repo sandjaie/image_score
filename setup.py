@@ -5,7 +5,7 @@ requirements = [
     "scikit-image",
     "click"
 ]
-version = '1.0.9'
+version = '1.1.0'
 download_url = f'https://github.com/sandjaie/image_score/archive/{version}.tar.gz'
 
 with open('README.md', 'r', errors='ignore') as fd:
