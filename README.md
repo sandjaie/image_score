@@ -61,7 +61,7 @@ To deploy a new version tag it. e.g
 git tag -a v1.1.0
 git push origin v1.1.0
 ```
-When a tag is pushed, travis starts building and uploading the application to pypi<br>
+When a tag is pushed, travis starts building and uploads the application to pypi<br>
 Pypi Release: https://pypi.org/project/imagescore/<br>
 Github Release: https://github.com/sandjaie/image_score/releases<br>
 Travis Builds: https://travis-ci.com/sandjaie/image_score/<br>
