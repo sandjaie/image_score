@@ -5,7 +5,7 @@ requirements = [
     "scikit-image",
     "click"
 ]
-version = '1.0.7'
+version = '1.0.8'
 download_url = f'https://github.com/sandjaie/image_score/archive/{version}.tar.gz'
 
 with open('README.md', 'r', errors='ignore') as fd:
@@ -16,8 +16,8 @@ setup(
     description='Calculates the similarity score between images',
     long_description=long_desc,
     long_description_content_type='text/markdown',
-    url='https://github.com/sandjaie/image_score',
     author='sandjaie',
+    url='https://github.com/sandjaie/image_score',
     author_email='sandjaie@gmail.com',
     version=version,
     packages=find_packages(),
